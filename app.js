@@ -1,5 +1,9 @@
 let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
+function saveComplaints() {
+  localStorage.setItem("complaints", JSON.stringify(complaints));
+}
+
 function renderComplaints() {
   const list = document.getElementById("complaintList");
   list.innerHTML = complaints.map((c, index) => `
@@ -8,6 +12,7 @@ function renderComplaints() {
       <p><strong>Category:</strong> ${c.category}</p>
       <p><strong>Details:</strong> ${c.details}</p>
       <p><strong>Status:</strong> ${c.status}</p>
+      <button onclick="deleteComplaint(${index})">Delete</button>
     </div>
   `).join("");
 }
@@ -29,13 +34,18 @@ function submitComplaint() {
     status: "Pending"
   });
 
-  localStorage.setItem("complaints", JSON.stringify(complaints));
-
+  saveComplaints();
   renderComplaints();
 
   document.getElementById("title").value = "";
   document.getElementById("details").value = "";
   document.getElementById("category").value = "Hostel";
+}
+
+function deleteComplaint(index) {
+  complaints.splice(index, 1);
+  saveComplaints();
+  renderComplaints();
 }
 
 renderComplaints();
