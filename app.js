@@ -1,41 +1,35 @@
 let complaints = [];
 
-function loginStudent() {
-  alert("Login clicked. We will connect Firebase later.");
-}
-
 function submitComplaint() {
-  const title = document.getElementById("title").value;
-  const details = document.getElementById("details").value;
+  const title = document.getElementById("title").value.trim();
+  const details = document.getElementById("details").value.trim();
   const category = document.getElementById("category").value;
+  const list = document.getElementById("complaintList");
 
   if (!title || !details) {
     alert("Please fill all fields");
     return;
   }
 
-  complaints.push({
+  const complaint = {
     title,
     details,
     category,
     status: "Pending"
-  });
+  };
 
-  renderComplaints();
+  complaints.push(complaint);
+
+  list.innerHTML = complaints.map((c, index) => `
+    <div class="complaint-box">
+      <h3>${index + 1}. ${c.title}</h3>
+      <p><strong>Category:</strong> ${c.category}</p>
+      <p><strong>Details:</strong> ${c.details}</p>
+      <p><strong>Status:</strong> ${c.status}</p>
+    </div>
+  `).join("");
 
   document.getElementById("title").value = "";
   document.getElementById("details").value = "";
-}
-
-function renderComplaints() {
-  const list = document.getElementById("complaintList");
-
-  list.innerHTML = complaints.map(c => `
-    <div style="border:1px solid #ddd;padding:10px;margin-top:10px;">
-      <b>${c.title}</b><br>
-      ${c.details}<br>
-      Category: ${c.category}<br>
-      Status: ${c.status}
-    </div>
-  `).join("");
+  document.getElementById("category").value = "Hostel";
 }
