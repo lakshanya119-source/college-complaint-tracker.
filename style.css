@@ -1,37 +1,69 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f6f9;
+  background: #f4f7fb;
   margin: 0;
   padding: 20px;
+  color: #222;
 }
 
 .container {
-  max-width: 800px;
-  margin: auto;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
-.card {
-  background: white;
-  padding: 20px;
-  margin: 20px 0;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1f4b99;
 }
 
-input, textarea, select, button {
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input, textarea, select {
   width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #d6dce8;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #1f4b99;
 }
 
 button {
-  background: #2563eb;
-  color: white;
+  padding: 12px 16px;
   border: none;
+  border-radius: 10px;
+  background: #1f4b99;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #1d4ed8;
+  background: #163b78;
+}
+
+.complaint-card {
+  background: #f9fbff;
+  border: 1px solid #e3e8f3;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.complaint-card h3 {
+  margin: 0 0 8px;
+  color: #1f4b99;
 }
