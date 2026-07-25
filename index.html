@@ -4,9 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>College Complaint Tracker</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>College Complaint Tracker</h1>
-  <p>Hello bro, this is my first project.</p>
+  <div class="container">
+    <h1>College Complaint Tracker</h1>
+    <p>This is your first project.</p>
+
+    <div class="card">
+      <h2>Raise a Complaint</h2>
+      <input type="text" id="title" placeholder="Complaint title" />
+      <textarea id="details" placeholder="Describe your issue"></textarea>
+      <select id="category">
+        <option>Hostel</option>
+        <option>Classroom</option>
+        <option>Wi-Fi</option>
+        <option>Canteen</option>
+        <option>Lab</option>
+      </select>
+      <button onclick="submitComplaint()">Submit Complaint</button>
+    </div>
+
+    <div class="card">
+      <h2>My Complaints</h2>
+      <div id="complaintList"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
