@@ -1,45 +1,50 @@
 let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+let editIndex = null;
+
+const form = document.getElementById("complaintForm");
+const input = document.getElementById("complaintInput");
+const list = document.getElementById("complaintList");
 
 function saveComplaints() {
   localStorage.setItem("complaints", JSON.stringify(complaints));
 }
 
 function renderComplaints() {
-  const list = document.getElementById("complaintList");
-  list.innerHTML = complaints.map((c, index) => `
-    <div class="complaint-box">
-      <h3>${index + 1}. ${c.title}</h3>
-      <p><strong>Category:</strong> ${c.category}</p>
-      <p><strong>Details:</strong> ${c.details}</p>
-      <p><strong>Status:</strong> ${c.status}</p>
+  list.innerHTML = "";
+
+  complaints.forEach((complaint, index) => {
+    const div = document.createElement("div");
+    div.className = "complaint-card";
+    div.innerHTML = `
+      <p>${complaint}</p>
+      <button onclick="editComplaint(${index})">Edit</button>
       <button onclick="deleteComplaint(${index})">Delete</button>
-    </div>
-  `).join("");
+    `;
+    list.appendChild(div);
+  });
 }
 
-function submitComplaint() {
-  const title = document.getElementById("title").value.trim();
-  const details = document.getElementById("details").value.trim();
-  const category = document.getElementById("category").value;
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  if (!title || !details) {
-    alert("Please fill all fields");
-    return;
+  const value = input.value.trim();
+  if (value === "") return;
+
+  if (editIndex === null) {
+    complaints.push(value);
+  } else {
+    complaints[editIndex] = value;
+    editIndex = null;
   }
 
-  complaints.push({
-    title,
-    details,
-    category,
-    status: "Pending"
-  });
-
+  input.value = "";
   saveComplaints();
   renderComplaints();
+});
 
-  document.getElementById("title").value = "";
-  document.getElementById("details").value = "";
-  document.getElementById("category").value = "Hostel";
+function editComplaint(index) {
+  input.value = complaints[index];
+  editIndex = index;
 }
 
 function deleteComplaint(index) {
