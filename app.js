@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitBtn = document.getElementById("submitBtn");
   const updateBtn = document.getElementById("updateBtn");
 
+  console.log("submitBtn:", submitBtn);
+  console.log("updateBtn:", updateBtn);
+
   function saveComplaints() {
     localStorage.setItem("complaints", JSON.stringify(complaints));
   }
