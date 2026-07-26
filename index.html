@@ -9,20 +9,21 @@
 <body>
   <div class="container">
     <h1>College Complaint Tracker</h1>
-    <p>This is your first project.</p>
+    <p>Raise, edit, update, and delete complaints easily.</p>
 
     <div class="card">
       <h2>Raise a Complaint</h2>
       <input type="text" id="title" placeholder="Complaint title" />
       <textarea id="details" placeholder="Describe your issue"></textarea>
       <select id="category">
-        <option>Hostel</option>
-        <option>Classroom</option>
-        <option>Wi-Fi</option>
-        <option>Canteen</option>
-        <option>Lab</option>
+        <option value="Hostel">Hostel</option>
+        <option value="Classroom">Classroom</option>
+        <option value="Wi-Fi">Wi-Fi</option>
+        <option value="Canteen">Canteen</option>
+        <option value="Lab">Lab</option>
       </select>
-      <button type="button" onclick="submitComplaint()">Submit Complaint</button>
+
+      <button type="button" id="submitBtn">Submit Complaint</button>
       <button type="button" id="updateBtn" style="display:none;">Update Complaint</button>
     </div>
 
