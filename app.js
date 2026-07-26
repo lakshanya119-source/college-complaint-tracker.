@@ -1,9 +1,10 @@
 let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
-let editIndex = null;
 
-const form = document.getElementById("complaintForm");
-const input = document.getElementById("complaintInput");
+const titleInput = document.getElementById("title");
+const detailsInput = document.getElementById("details");
+const categoryInput = document.getElementById("category");
 const list = document.getElementById("complaintList");
+const formButton = document.querySelector("button");
 
 function saveComplaints() {
   localStorage.setItem("complaints", JSON.stringify(complaints));
@@ -16,17 +17,29 @@ function renderComplaints() {
     const div = document.createElement("div");
     div.className = "complaint-card";
     div.innerHTML = `
-      <p>${complaint}</p>
-      <button onclick="editComplaint(${index})">Edit</button>
+      <h3>${complaint.title}</h3>
+      <p><strong>Category:</strong> ${complaint.category}</p>
+      <p>${complaint.details}</p>
       <button onclick="deleteComplaint(${index})">Delete</button>
     `;
     list.appendChild(div);
   });
 }
 
-function editComplaint(index) {
-  input.value = complaints[index];
-  editIndex = index;
+function submitComplaint() {
+  const title = titleInput.value.trim();
+  const details = detailsInput.value.trim();
+  const category = categoryInput.value;
+
+  if (title === "" || details === "") return;
+
+  complaints.push({ title, details, category });
+  saveComplaints();
+  renderComplaints();
+
+  titleInput.value = "";
+  detailsInput.value = "";
+  categoryInput.selectedIndex = 0;
 }
 
 function deleteComplaint(index) {
@@ -34,23 +47,5 @@ function deleteComplaint(index) {
   saveComplaints();
   renderComplaints();
 }
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const complaintText = input.value.trim();
-  if (complaintText === "") return;
-
-  if (editIndex !== null) {
-    complaints[editIndex] = complaintText;
-    editIndex = null;
-  } else {
-    complaints.push(complaintText);
-  }
-
-  saveComplaints();
-  renderComplaints();
-  form.reset();
-});
 
 renderComplaints();
