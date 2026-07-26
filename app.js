@@ -1,16 +1,11 @@
 let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
-const titleInput = document.getElementById("title");
-const detailsInput = document.getElementById("details");
-const categoryInput = document.getElementById("category");
-const list = document.getElementById("complaintList");
-const formButton = document.querySelector("button");
-
 function saveComplaints() {
   localStorage.setItem("complaints", JSON.stringify(complaints));
 }
 
 function renderComplaints() {
+  const list = document.getElementById("complaintList");
   list.innerHTML = "";
 
   complaints.forEach((complaint, index) => {
@@ -20,13 +15,17 @@ function renderComplaints() {
       <h3>${complaint.title}</h3>
       <p><strong>Category:</strong> ${complaint.category}</p>
       <p>${complaint.details}</p>
-      <button onclick="deleteComplaint(${index})">Delete</button>
+      <button type="button" onclick="deleteComplaint(${index})">Delete</button>
     `;
     list.appendChild(div);
   });
 }
 
 function submitComplaint() {
+  const titleInput = document.getElementById("title");
+  const detailsInput = document.getElementById("details");
+  const categoryInput = document.getElementById("category");
+
   const title = titleInput.value.trim();
   const details = detailsInput.value.trim();
   const category = categoryInput.value;
