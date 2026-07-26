@@ -24,24 +24,6 @@ function renderComplaints() {
   });
 }
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const value = input.value.trim();
-  if (value === "") return;
-
-  if (editIndex === null) {
-    complaints.push(value);
-  } else {
-    complaints[editIndex] = value;
-    editIndex = null;
-  }
-
-  input.value = "";
-  saveComplaints();
-  renderComplaints();
-});
-
 function editComplaint(index) {
   input.value = complaints[index];
   editIndex = index;
@@ -52,5 +34,23 @@ function deleteComplaint(index) {
   saveComplaints();
   renderComplaints();
 }
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const complaintText = input.value.trim();
+  if (complaintText === "") return;
+
+  if (editIndex !== null) {
+    complaints[editIndex] = complaintText;
+    editIndex = null;
+  } else {
+    complaints.push(complaintText);
+  }
+
+  saveComplaints();
+  renderComplaints();
+  form.reset();
+});
 
 renderComplaints();
