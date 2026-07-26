@@ -1,4 +1,5 @@
 let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+let editIndex = -1;
 
 function saveComplaints() {
   localStorage.setItem("complaints", JSON.stringify(complaints));
@@ -15,7 +16,10 @@ function renderComplaints() {
       <h3>${complaint.title}</h3>
       <p><strong>Category:</strong> ${complaint.category}</p>
       <p>${complaint.details}</p>
-      <button type="button" onclick="deleteComplaint(${index})">Delete</button>
+
+       <button type="button" onclick="editComplaint(${index})">Edit</button>
+       <button type="button" onclick="deleteComplaint(${index})">Delete</button>
+      
     `;
     list.appendChild(div);
   });
